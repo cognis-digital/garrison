@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crucible"
+version = "0.1.0"
+description = "Self-hosted cyber-ops training range & curriculum — role tracks, offline auto-grading, readiness scoring. Cognis Digital."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Cognis Digital LLC" }]
+keywords = ["cyber-range", "training", "curriculum", "detection-engineering", "red-team", "soc", "cyberwarfare", "cognis"]
+license = { text = "COCL-1.0" }
+dependencies = []
+
+[project.urls]
+Homepage = "https://cognis.digital"
+Repository = "https://github.com/cognis-digital/crucible"
+
+[project.scripts]
+crucible = "crucible.cli:main"
+
+[tool.setuptools]
+packages = ["crucible"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
