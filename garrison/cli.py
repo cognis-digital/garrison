@@ -1,4 +1,4 @@
-"""Crucible CLI."""
+"""Garrison CLI."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def cmd_brief(args):
     print("Objectives:"); [print(f"  - {o}") for o in b["objectives"]]
     if b["hints"]:
         print("Hints:"); [print(f"  ? {h}") for h in b["hints"]]
-    print(f"\nGrade with:  crucible grade {b['id']} \"<your answer>\"")
+    print(f"\nGrade with:  garrison grade {b['id']} \"<your answer>\"")
     return 0
 
 
@@ -60,6 +60,27 @@ def cmd_curriculum(args):
     return 0
 
 
+def cmd_certify(args):
+    t = engine.load_trainee(args.trainee)
+    r = engine.certify(t, args.track, out_path=args.out)
+    if "error" in r:
+        print(r["error"]); return 1
+    print(f"[+] certificate issued -> {r['path']}")
+    print(f"    {r['level']} · {r['badge']} · credential {r['credential_id']}")
+    return 0
+
+
+def cmd_arsenal(args):
+    from collections import Counter
+    dom = Counter(e.domain for e in engine.catalog() if e.id.startswith("arsenal-"))
+    total = sum(dom.values())
+    print(f"# Arsenal — {total} tools as training modules, across {len(dom)} domains")
+    for d, n in dom.most_common():
+        print(f"  {d:14} {n} tools")
+    print("\n(hand-crafted core exercises are listed under `garrison ranges`)")
+    return 0
+
+
 def cmd_progress(args):
     t = engine.load_trainee(args.trainee)
     print(f"# Progress — {t.name}")
@@ -71,9 +92,9 @@ def cmd_progress(args):
 
 
 def build_parser():
-    p = argparse.ArgumentParser(prog="crucible",
+    p = argparse.ArgumentParser(prog="garrison",
                                 description="Self-hosted cyber-ops training range & curriculum — Cognis Digital")
-    p.add_argument("--version", action="version", version=f"crucible {__version__}")
+    p.add_argument("--version", action="version", version=f"garrison {__version__}")
     sub = p.add_subparsers(dest="command", required=True)
 
     sub.add_parser("tracks", help="list role-based curriculum tracks").set_defaults(func=cmd_tracks)
@@ -93,6 +114,13 @@ def build_parser():
 
     pr = sub.add_parser("progress", help="show a trainee's readiness across tracks")
     pr.add_argument("--trainee", default="default"); pr.set_defaults(func=cmd_progress)
+
+    a = sub.add_parser("arsenal", help="the whole toolset as training modules, by domain")
+    a.set_defaults(func=cmd_arsenal)
+
+    ct = sub.add_parser("certify", help="issue an official certificate for a qualified track")
+    ct.add_argument("track"); ct.add_argument("--trainee", default="default")
+    ct.add_argument("--out"); ct.set_defaults(func=cmd_certify)
     return p
 
 

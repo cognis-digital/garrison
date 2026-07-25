@@ -3,21 +3,21 @@ import json
 import os
 from contextlib import redirect_stdout
 
-import crucible
-from crucible import cli, engine
-from crucible.models import Exercise, Track, Trainee, grade
+import garrison
+from garrison import cli, engine
+from garrison.models import Exercise, Track, Trainee, grade
 
 
 def test_sdk_surface():
-    assert crucible.catalog() and crucible.tracks()
-    assert crucible.track("SOC Analyst").name == "SOC Analyst"
-    assert crucible.brief("de-sigma")["tool"] == "sigmacheck"
+    assert garrison.catalog() and garrison.tracks()
+    assert garrison.track("SOC Analyst").name == "SOC Analyst"
+    assert garrison.brief("de-sigma")["tool"] == "sigmacheck"
 
 
 def test_catalog_filters():
-    soc = crucible.catalog(track="SOC Analyst")
+    soc = garrison.catalog(track="SOC Analyst")
     assert soc and all(e.track == "SOC Analyst" for e in soc)
-    det = crucible.catalog(domain="detection")
+    det = garrison.catalog(domain="detection")
     assert det and all(e.domain == "detection" for e in det)
 
 
@@ -77,9 +77,9 @@ def test_trainee_readiness_and_badge():
 
 
 def test_persistence(tmp_path, monkeypatch):
-    monkeypatch.setenv("CRUCIBLE_HOME", str(tmp_path))
+    monkeypatch.setenv("GARRISON_HOME", str(tmp_path))
     import importlib
-    import crucible.engine as eng
+    import garrison.engine as eng
     importlib.reload(eng)
     t = eng.load_trainee("alice")
     eng.grade("soc-triage", "a", trainee=t)
@@ -97,7 +97,7 @@ def _run(argv):
 
 
 def test_cli_flow(tmp_path, monkeypatch):
-    monkeypatch.setenv("CRUCIBLE_HOME", str(tmp_path))
+    monkeypatch.setenv("GARRISON_HOME", str(tmp_path))
     assert _run(["tracks"])[0] == 0
     assert "Cyber Warfare" in _run(["tracks"])[1]
     assert _run(["ranges", "--track", "SOC Analyst"])[0] == 0

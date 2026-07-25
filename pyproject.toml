@@ -3,8 +3,8 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "crucible"
-version = "0.1.0"
+name = "garrison"
+version = "0.2.0"
 description = "Self-hosted cyber-ops training range & curriculum — role tracks, offline auto-grading, readiness scoring. Cognis Digital."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -15,13 +15,13 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://cognis.digital"
-Repository = "https://github.com/cognis-digital/crucible"
+Repository = "https://github.com/cognis-digital/garrison"
 
 [project.scripts]
-crucible = "crucible.cli:main"
+garrison = "garrison.cli:main"
 
 [tool.setuptools]
-packages = ["crucible"]
+packages = ["garrison"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

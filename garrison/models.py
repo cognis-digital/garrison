@@ -1,4 +1,4 @@
-"""Crucible core models — Exercise, Track, Trainee — and a deterministic grader.
+"""Garrison core models — Exercise, Track, Trainee — and a deterministic grader.
 
 An Exercise is one range task with objectives and a *self-contained* grader (no
 external service needed to score). A Track is a role-based curriculum path. A

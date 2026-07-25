@@ -1,4 +1,4 @@
-# Crucible — benchmark results
+# Garrison — benchmark results
 
 Catalog integrity + deterministic grading + readiness. Offline, deterministic. Regenerate with `python bench/run_all.py`.
 

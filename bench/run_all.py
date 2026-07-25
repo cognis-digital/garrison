@@ -1,4 +1,4 @@
-"""Crucible benchmark — catalog integrity + deterministic grading + readiness.
+"""Garrison benchmark — catalog integrity + deterministic grading + readiness.
 
 Validates: every exercise is well-formed and maps to a tool; every track
 references real exercises; the canonical correct answer PASSES each grader and a
@@ -15,9 +15,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from crucible import engine, grade, load_trainee  # noqa: E402
-from crucible.catalog import EXERCISES, TRACKS  # noqa: E402
-from crucible.models import Trainee  # noqa: E402
+from garrison import engine, grade, load_trainee  # noqa: E402
+from garrison.catalog import EXERCISES, TRACKS  # noqa: E402
+from garrison.models import Trainee  # noqa: E402
 
 # canonical correct answers (the answer key lives in the harness, not the catalog)
 SOLUTIONS = {
@@ -67,7 +67,7 @@ def evaluate():
 
 
 def write_results(res):
-    lines = ["# Crucible — benchmark results", "",
+    lines = ["# Garrison — benchmark results", "",
              "Catalog integrity + deterministic grading + readiness. Offline, deterministic. "
              "Regenerate with `python bench/run_all.py`.", "",
              f"- Exercises: **{res['exercises']}** across **{res['tracks']}** role tracks",

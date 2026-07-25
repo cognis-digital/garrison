@@ -1,10 +1,10 @@
-<h1 align="center">Crucible</h1>
+<h1 align="center">Garrison</h1>
 <p align="center"><i>A self-hosted cyber-ops training range &amp; curriculum — role-based tracks, briefed exercises, offline auto-grading, mission-readiness scoring. The code-first answer to a paid cyber-training program.</i></p>
 <p align="center">Part of the Cognis Neural Suite · <a href="https://cognis.digital">cognis.digital</a></p>
 
 ---
 
-Crucible turns the Cognis security toolset into a **curriculum**. Operators run briefed
+Garrison turns the Cognis security toolset into a **curriculum**. Operators run briefed
 exercises across **role tracks**, submissions are **graded deterministically offline**, and
 progress rolls up into **mission-readiness** with completion badges. No cloud, no seat
 licenses, no data leaving your network — an **SDK + one-line CLI** you own.
@@ -12,30 +12,30 @@ licenses, no data leaving your network — an **SDK + one-line CLI** you own.
 ## One-line install
 ```bash
 # pipx (recommended) or pip — zero dependencies, Python 3.9+
-pipx install git+https://github.com/cognis-digital/crucible
-# or:  curl -sSL https://raw.githubusercontent.com/cognis-digital/crucible/main/install.sh | sh
-# Windows: iwr -useb https://raw.githubusercontent.com/cognis-digital/crucible/main/install.ps1 | iex
+pipx install git+https://github.com/cognis-digital/garrison
+# or:  curl -sSL https://raw.githubusercontent.com/cognis-digital/garrison/main/install.sh | sh
+# Windows: iwr -useb https://raw.githubusercontent.com/cognis-digital/garrison/main/install.ps1 | iex
 ```
 
 ## Use the CLI
 ```bash
-crucible tracks                       # role-based curriculum paths
-crucible ranges --track "SOC Analyst" # exercises in a track
-crucible brief cw-gnss                # objectives, tool, hints for one exercise
-crucible grade soc-spray "password spray"   # submit an answer — scored + tracked
-crucible curriculum "Cyber Warfare Operator"
-crucible progress                     # your readiness across every track
+garrison tracks                       # role-based curriculum paths
+garrison ranges --track "SOC Analyst" # exercises in a track
+garrison brief cw-gnss                # objectives, tool, hints for one exercise
+garrison grade soc-spray "password spray"   # submit an answer — scored + tracked
+garrison curriculum "Cyber Warfare Operator"
+garrison progress                     # your readiness across every track
 ```
 
 ## Use the SDK
 ```python
-import crucible
-crucible.tracks()                              # the role paths
-crucible.brief("de-sigma")                     # exercise brief + objectives
-t = crucible.load_trainee("me")
-crucible.grade("soc-spray", "password spray", trainee=t)
-crucible.save_trainee(t)
-crucible.readiness(t)                          # [{track, level, badge, ...}]
+import garrison
+garrison.tracks()                              # the role paths
+garrison.brief("de-sigma")                     # exercise brief + objectives
+t = garrison.load_trainee("me")
+garrison.grade("soc-spray", "password spray", trainee=t)
+garrison.save_trainee(t)
+garrison.readiness(t)                          # [{track, level, badge, ...}]
 ```
 
 ## Tracks (mission-ready role paths)
@@ -61,7 +61,7 @@ reaches **mission-ready + badge**. 12 tests, CI 3.9–3.13.
 
 ## Extend it
 ```python
-from crucible.models import Exercise
+from garrison.models import Exercise
 Exercise("de-new", "Detect X", "Detection Engineer", "detection", 3, "sigmacheck",
          "Write a Sigma rule for …", ["objective"], {"type": "artifact_sigma"}, points=150)
 ```

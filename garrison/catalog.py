@@ -1,4 +1,4 @@
-"""Crucible catalog — the curriculum: exercises (each mapped to a Cognis tool +
+"""Garrison catalog — the curriculum: exercises (each mapped to a Cognis tool +
 a self-contained grader) organized into role-based tracks. Content, no logic.
 """
 
